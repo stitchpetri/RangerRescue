@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "Components/TimelineComponent.h"
+#include "SavingSystem/SaveInterface.h"
 #include "MainCharacter.generated.h"
 
 // FORWARD DECLARES -----------------------
@@ -18,7 +19,7 @@ class UInputAction;
 struct FInputActionValue;
 //- ---------------------------------------
 UCLASS()
-class RANGERRESCUE_API AMainCharacter : public ACharacter
+class RANGERRESCUE_API AMainCharacter : public ACharacter, public ISaveInterface
 {
 	GENERATED_BODY()
 
@@ -29,27 +30,27 @@ class RANGERRESCUE_API AMainCharacter : public ACharacter
 	/** Camera boom positioning the camera behind the character */
 	
 	/** MappingContext */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Default|Input", meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* DefaultMappingContext;
 
 	/** Jump Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Default|Input", meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
 
 	/** Move Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Default|Input", meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
 
 	/** Look Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Default|Input", meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
 	/** Interact Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Default|Input", meta = (AllowPrivateAccess = "true"))
 	UInputAction* Interaction;
 
 	/** Interact Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Default|Input", meta = (AllowPrivateAccess = "true"))
 	UInputAction* FocusAction;
 
 	// -------------------------------------------------------------------------------------------------
@@ -62,13 +63,13 @@ class RANGERRESCUE_API AMainCharacter : public ACharacter
 	UCameraComponent* ThirdPersonCamera;
 
 	/** MappingContext */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Default|BuildMode", meta = (AllowPrivateAccess = "true"))
 	ABuildModePawn* BuildModePawn;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Default|Focus", meta = (AllowPrivateAccess = "true"))
 	float NormalSpringArmLength = 300.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Default|Focus", meta = (AllowPrivateAccess = "true"))
 	float FocusSpringArmLength = 150.0f;
 
 
@@ -76,6 +77,10 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
+	// Implement functions from ISaveInterface (but leave them as pure virtual)
+	virtual void OnBeforeSave_Implementation() override;
+	virtual FString GetUniqueSaveName_Implementation() override;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

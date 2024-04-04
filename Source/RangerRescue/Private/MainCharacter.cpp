@@ -36,6 +36,17 @@ AMainCharacter::AMainCharacter()
 
 }
 
+void AMainCharacter::OnBeforeSave_Implementation()
+{
+	// blueprint
+	
+}
+
+FString AMainCharacter::GetUniqueSaveName_Implementation()
+{
+	FString Name = "Player";
+	return Name;
+}
 
 
 // Called when the game starts or when spawned
