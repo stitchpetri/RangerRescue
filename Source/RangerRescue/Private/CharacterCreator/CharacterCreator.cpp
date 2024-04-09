@@ -221,6 +221,12 @@ void ACharacterCreator::HighlightUpdate()
 				SetHighlightParams("HighlightID", 2);
 				SetHighlightParams("HighlightOn", 1);
 			}
+			else if (HitComponentName == "Crest")
+			{
+				CurrentManipulation = HitComponentName;
+				SetHighlightParams("HighlightID", 1);
+				SetHighlightParams("HighlightOn", 1);
+			}
 			else
 			{
 				// If the component hit is not one we're interested in, treat it as a request to rotate the camera.

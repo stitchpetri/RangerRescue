@@ -21,16 +21,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// Assign the character creator variable
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Collision")
-	UBoxComponent* Nose;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Collision")
-	UBoxComponent* Jaw;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Collision")
-	UBoxComponent* Ear;
 
 public:	
 	// Called every frame

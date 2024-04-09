@@ -3,7 +3,15 @@
 
 #include "CharacterCreator/PlayerCharacterCreator.h"
 
+#include "Components/BoxComponent.h"
+
 #include "Kismet/GameplayStatics.h"
+
+APlayerCharacterCreator::APlayerCharacterCreator()
+{
+
+	
+}
 
 void APlayerCharacterCreator::BeginPlay()
 {

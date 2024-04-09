@@ -11,14 +11,6 @@ ACustomCharacter::ACustomCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Nose = CreateDefaultSubobject<UBoxComponent>(TEXT("Nose"));
-	Nose->SetupAttachment(this->GetMesh(), "head");
-
-	Jaw = CreateDefaultSubobject<UBoxComponent>(TEXT("Jaw"));
-	Jaw->SetupAttachment(this->GetMesh(), "head");
-
-	Ear = CreateDefaultSubobject<UBoxComponent>(TEXT("Ear"));
-	Ear->SetupAttachment(this->GetMesh(), "head");
 	
 	
 }

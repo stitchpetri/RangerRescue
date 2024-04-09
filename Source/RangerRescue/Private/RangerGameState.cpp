@@ -15,12 +15,26 @@ ARangerGameState::ARangerGameState()
 	Clockwork = 1.0f;
 }
 
+void ARangerGameState::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	//sets inital clockwork settings 
+	Clockwork = Hours+Minutes+Seconds;
+	
+	GameDate[0] = Day;
+	GameDate[1] = Month;
+	GameDate[2] = Year;
+}
+
 void ARangerGameState::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	const FDivisionResult Result = SetClockwork(DeltaTime);
-	Clockwork = Result.Remainder;
+	
 	DayTick = Result.ReturnValue;
+	Clockwork = Result.Remainder;
+	
 
 	Clock();
 	Calendar();
@@ -56,6 +70,8 @@ void ARangerGameState::Clock()
 	GameTime[0] = Seconds;
 	GameTime[1] = Minutes;
 	GameTime[2] = Hours;
+
+	//SetTimeUI(GameTime);
 	
 }
 
@@ -78,4 +94,7 @@ void ARangerGameState::Calendar()
 	GameDate[0] = Day;
 	GameDate[1] = Month;
 	GameDate[2] = Year;
+
+	//SetDayUI(GameDate);
 }
+

@@ -16,7 +16,7 @@ class RANGERRESCUE_API APlayerCharacterCreator : public ACharacterCreator
 	GENERATED_BODY()
 public:
 
-	//APlayerCharacterCreator();
+	APlayerCharacterCreator();
 	
 	virtual void BeginPlay() override;
 

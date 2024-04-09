@@ -156,7 +156,7 @@ void AMainCharacter::OpenBuildMode()
 
 void AMainCharacter::CloseBuildMode()
 {
-	
+	this->GetController()->Possess(this);
 	bInBuildMode = false;
 }
 

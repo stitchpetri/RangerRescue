@@ -29,6 +29,7 @@ class RANGERRESCUE_API ARangerGameState : public AGameStateBase
 
 public:
 	ARangerGameState();
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintPure, BlueprintImplementableEvent)
@@ -78,4 +79,12 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	void Calendar();
+
+	/*
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetTimeUI(TArray<int32> Time);
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetDayUI(TArray<int32> Date);
+	*/
 };

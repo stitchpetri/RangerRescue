@@ -80,6 +80,10 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	float MaxArmDistance= 2000.0;
+
+	// ---------------------Building --------------------------------
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Building")
+	bool bisBuildModeActive;
 	
 public:	
 	// Called every frame
