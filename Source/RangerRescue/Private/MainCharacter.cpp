@@ -12,6 +12,8 @@
 
 
 #include "BuildMode/BuildModePawn.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Sight.h"
 
 
 // Sets default values
@@ -28,12 +30,13 @@ AMainCharacter::AMainCharacter()
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
 	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
-
+	
 	
 	ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
 	ThirdPersonCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	ThirdPersonCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	SetupStimulusSource();
 }
 
 void AMainCharacter::OnBeforeSave_Implementation()
@@ -54,6 +57,10 @@ void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	APlayerCameraManager* const camMan = GetWorld()->GetFirstPlayerController()->PlayerCameraManager;
+	camMan->ViewPitchMin = ViewPitchMin;
+	camMan->ViewPitchMax = ViewPitchMax;
+	
 	//Add Input Mapping Context
 	if (const APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
@@ -82,6 +89,17 @@ void AMainCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	FocusTimeline.TickTimeline(DeltaTime);
+}
+
+void AMainCharacter::SetupStimulusSource()
+{
+	StimuliSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("Stimulus"));
+	if (StimuliSource)
+	{
+		StimuliSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
+		StimuliSource->RegisterWithPerceptionSystem();
+	}
+	
 }
 
 void AMainCharacter::Move(const FInputActionValue& Value)

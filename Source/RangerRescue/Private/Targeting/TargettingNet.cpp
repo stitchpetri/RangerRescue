@@ -39,14 +39,15 @@ TArray<AActor*> ATargettingNet::GetTargetsInRange()
 
 	for (AActor* Actor : OverlappingActors)
 	{
+		
 		if (Actor->Implements<UFocusInterface>())
 		{
 			TargetsInRange.AddUnique(Actor);
-			if (MyPlayerController->RecentlyTargeted.Contains(Actor))
+			if (!MyPlayerController->RecentlyTargeted.Contains(Actor))
 			{
-				
 				FreshTargetsInRange.AddUnique(Actor);
 			}
+			
 			
 		}
 		

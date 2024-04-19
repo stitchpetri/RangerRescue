@@ -27,5 +27,8 @@ public:
 	void OnPlayerFocus();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "FocusInterface")
+	void OnPlayerLooseFocus();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "FocusInterface")
 	bool isFocasable();
 };

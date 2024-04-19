@@ -17,7 +17,7 @@ public:
 	ATargettingNet();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sphere")
-	float SphereRadius = 600.0f;
+	float SphereRadius = 150.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sphere")
 	USphereComponent* Net;

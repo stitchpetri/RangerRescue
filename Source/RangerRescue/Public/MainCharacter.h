@@ -109,6 +109,11 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	bool bInBuildMode = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Deafult", meta = (AllowPrivateAccess = "true"))
+	float ViewPitchMin = -50.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Deafult", meta = (AllowPrivateAccess = "true"))
+	float ViewPitchMax = 10.0f;
 	
 public:	
 	// Called every frame
@@ -116,8 +121,13 @@ public:
 
 private:
 	FTimeline FocusTimeline;
+	
 	UPROPERTY(EditAnywhere, Category = "Timeline")
-	UCurveFloat* CurveFloatAsset; // Ensure this asset is assigned in the editor
+	UCurveFloat* CurveFloatAsset;
+
+	class UAIPerceptionStimuliSourceComponent* StimuliSource;
+
+	void SetupStimulusSource();
 	
 
 };

@@ -29,13 +29,13 @@ class RANGERRESCUE_API ARangerPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
-	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TArray<AActor*> RecentlyTargeted;
 
 protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Targetting")
-	void Target();
+	AActor* Target();
 
 	UFUNCTION(BlueprintCallable, Category = "Targetting")
 	FClosestActorResult GetClosestActor(TArray<AActor*> Actors);
@@ -46,6 +46,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Targetting")
 	void ClearFocus();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Targetting")
+	void OnStoppedFocus(AActor* Target);
 	
 
 	AActor* Targetter;
@@ -55,4 +57,7 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targetting")
 	UClass* TargetterClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Targeting")
+	TSubclassOf<class ATargettingNet> TargettingNetClass;
 };

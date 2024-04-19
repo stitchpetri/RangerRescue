@@ -6,24 +6,29 @@
 #include "K2Node_SpawnActorFromClass.h"
 #include "Targeting/TargettingNet.h"
 
-void ARangerPlayerController::Target()
+AActor* ARangerPlayerController::Target()
 {
 	UWorld* World = GetWorld();
 	if (World)
 	{
+		const APawn* Char = this->GetPawn();
+		const FVector ForwardVector = Char->GetActorForwardVector();
+		const float Distance = 100.0;
+		const FVector NetSpawnLocation = Char->GetActorLocation() +  (ForwardVector * Distance);
 		const FActorSpawnParameters SpawnParameters;
 
-		ATargettingNet* TargettingNet = World->SpawnActor<ATargettingNet>(ATargettingNet::StaticClass(), this->GetPawn()->GetActorLocation(), FRotator::ZeroRotator, SpawnParameters);
+		ATargettingNet* TargettingNet = World->SpawnActor<ATargettingNet>(TargettingNetClass, NetSpawnLocation, FRotator::ZeroRotator, SpawnParameters);
 
 		if (TargettingNet)
 		{
 			
 			AActor* ClosestActor = GetClosestActor(TargettingNet->GetTargetsInRange()).Actor;
 			
-			ClearFocus();
 			FocusActor(ClosestActor);
+			return ClosestActor;
 		}
 	}
+	return nullptr;
 }
 
 
@@ -31,7 +36,7 @@ FClosestActorResult ARangerPlayerController::GetClosestActor(TArray<AActor*> Act
 {
 	FClosestActorResult Result;
 	Result.Actor = nullptr;
-	Result.Distance = 1000.0f;
+	Result.Distance = 50000.0f;
 	
 	for (AActor* Actor : Actors)
 	{
@@ -50,6 +55,7 @@ void ARangerPlayerController::FocusActor(AActor* Actor)
 {
 	if (Actor != nullptr)
 	{
+		
 		CurrentTarget = Actor;
 
 		RecentlyTargeted.AddUnique(Actor);
@@ -72,6 +78,7 @@ void ARangerPlayerController::FocusActor(AActor* Actor)
 
 void ARangerPlayerController::ClearFocus()
 {
+	OnStoppedFocus(CurrentTarget);
 	CurrentTarget = nullptr;
 	if(Targetter)
 	{
