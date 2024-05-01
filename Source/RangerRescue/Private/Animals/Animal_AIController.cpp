@@ -37,9 +37,9 @@ void AAnimal_AIController::SetupPerceptionSystem()
 	{
 		SetPerceptionComponent(*CreateDefaultSubobject<UAIPerceptionComponent>(
 		TEXT("Perception Component")));
-		SightConfig->SightRadius = 500.f;
-		SightConfig->LoseSightRadius = SightConfig->SightRadius + 25.f;
-		SightConfig->PeripheralVisionAngleDegrees = 90.f;
+		SightConfig->SightRadius = 1000.f;
+		SightConfig->LoseSightRadius = SightConfig->SightRadius + 250.f;
+		SightConfig->PeripheralVisionAngleDegrees = 70.f;
 		SightConfig->SetMaxAge(5.f);
 		SightConfig->AutoSuccessRangeFromLastSeenLocation = 520.f;
 		SightConfig->DetectionByAffiliation.bDetectEnemies = true;

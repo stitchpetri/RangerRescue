@@ -14,7 +14,7 @@ UBTT_FindRandomLocation::UBTT_FindRandomLocation(FObjectInitializer const& Objec
 
 EBTNodeResult::Type UBTT_FindRandomLocation::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	if (auto* const controller = Cast<AAnimal_AIController>(OwnerComp.GetAIOwner()))
+	if (auto* const controller = Cast<AAIController>(OwnerComp.GetAIOwner()))
 	{
 		if (auto* const animal = controller->GetPawn())
 		{

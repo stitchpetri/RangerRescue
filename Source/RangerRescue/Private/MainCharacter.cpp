@@ -37,6 +37,8 @@ AMainCharacter::AMainCharacter()
 	ThirdPersonCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	SetupStimulusSource();
+	
+	//Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
 }
 
 void AMainCharacter::OnBeforeSave_Implementation()

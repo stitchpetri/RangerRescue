@@ -78,10 +78,15 @@ void ARangerPlayerController::FocusActor(AActor* Actor)
 
 void ARangerPlayerController::ClearFocus()
 {
-	OnStoppedFocus(CurrentTarget);
-	CurrentTarget = nullptr;
-	if(Targetter)
+	if (CurrentTarget)
 	{
-		Targetter->Destroy();
+		OnStoppedFocus(CurrentTarget);
+		if(Targetter != nullptr)
+		{
+			Targetter->Destroy();
+		}
+		CurrentTarget = nullptr;
 	}
+	
+	
 }

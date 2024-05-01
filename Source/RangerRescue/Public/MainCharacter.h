@@ -23,7 +23,7 @@ class RANGERRESCUE_API AMainCharacter : public ACharacter, public ISaveInterface
 {
 	GENERATED_BODY()
 
-
+private:
 
 	// -------------------------- INPUT VARIABLES--------------------------------------
 	// --------------------------------------------------------------------------------
@@ -62,6 +62,12 @@ class RANGERRESCUE_API AMainCharacter : public ACharacter, public ISaveInterface
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* ThirdPersonCamera;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Deafult", meta = (AllowPrivateAccess = "true"))
+	float ViewPitchMin = -50.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Deafult", meta = (AllowPrivateAccess = "true"))
+	float ViewPitchMax = 10.0f;
+
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Default|BuildMode", meta = (AllowPrivateAccess = "true"))
 	ABuildModePawn* BuildModePawn;
@@ -71,6 +77,10 @@ class RANGERRESCUE_API AMainCharacter : public ACharacter, public ISaveInterface
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Default|Focus", meta = (AllowPrivateAccess = "true"))
 	float FocusSpringArmLength = 150.0f;
+	
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Default", meta = (AllowPrivateAccess = "true"))
+	//UInventoryComponent* Inventory = nullptr;
+
 
 
 public:
@@ -109,17 +119,16 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	bool bInBuildMode = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Deafult", meta = (AllowPrivateAccess = "true"))
-	float ViewPitchMin = -50.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Deafult", meta = (AllowPrivateAccess = "true"))
-	float ViewPitchMax = 10.0f;
+	
 	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 private:
+
+	
+
 	FTimeline FocusTimeline;
 	
 	UPROPERTY(EditAnywhere, Category = "Timeline")
