@@ -4,12 +4,12 @@
 
 #include "CharacterCreator/CharacterCreator.h"
 
-#include "AssetDefinition.h"
-#include "NavigationSystemTypes.h"
+
+
 #include "Camera/CameraComponent.h"
 #include "Character/CustomCharacter.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Iris/ReplicationSystem/RepTag.h"
+
 #include "Kismet/GameplayStatics.h"
 #include "Components/Image.h"
 #include "Widgets/Images/SImage.h"

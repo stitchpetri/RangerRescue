@@ -3,7 +3,7 @@
 
 #include "RangerPlayerController.h"
 
-#include "K2Node_SpawnActorFromClass.h"
+
 #include "Targeting/TargettingNet.h"
 
 AActor* ARangerPlayerController::Target()
